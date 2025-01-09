@@ -2,3 +2,4 @@ __pycache__
 .env
 *test*
 read.md
+result.json

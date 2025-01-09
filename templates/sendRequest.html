@@ -8,17 +8,15 @@
 
 {% block body %}
 <p><a href="/">Назад</a></p>
-<!-- <form action="/submitRequest" enctype="multipart/form-data" method='post'>
-<p>Прикрепите резюме</p>
-<input type='file' name='file'><br>
-<button type='submit'>Отправить</button>
-</form> -->
 
-<div class="test-block" id="test-block">
+<button id="start-test">Начать тестирование</button>
+
+<div class="test-block" id="test-block" hidden="true">
     <h2 id="question-field">Question</h2>
     <p><input placeholder="Введите ответ" id="answ-field"></p>
-    <p><button id="send-answ">Ответить</button></p>
+    <span class="error" id="error"></span><br>
+    <button id="send-answ">Ответить</button>
 </div>
 
-<script src="{{ url_for('static', filename='js/tester.js') }}"></script>
+<script src="{{ url_for('static', filename='js/testRunner.js') }}"></script>
 {% endblock %}
