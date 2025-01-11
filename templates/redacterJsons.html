@@ -1,7 +1,22 @@
-{% extends "base.html" %} 
-
-{% block title %}Редактор json{% endblock %} 
-
-{% block body %}
+{% extends "base.html" %} {% block title %}Редактор json{% endblock %} {% block
+body %}
 <h2>Редактор</h2>
+<p><a href="/">Назад</a></p>
+
+<div class="control-menu" id="control-menu">
+<select id="dropdown-files">
+</select>
+<button id="update-dropdown">Обновить</button>
+<div>
+    <button id="load-file">Загрузить</button>
+    <button id="create-new-file">Создать новый файл</button>
+    <button id="save-file">Сохранить</button>
+    <button id="del-file">Удалить</button>
+</div>
+<input type="text" id="input-field" placeholder="Название файла для создания">
+</div>
+
+<p id="json-data" contenteditable="true"></p>
+
+<script type="module" src="{{ url_for('static', filename='js/redactManager.js') }}"></script>
 {% endblock %}

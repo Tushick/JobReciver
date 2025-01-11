@@ -47,5 +47,46 @@ def get_data_from_client():
         return "400: Request does not have application/json header", 400
 
 
+# * Функции для работы с системой
+# ? Функция для отправки данных
+@app.route("/get/<string:name_func>", methods=["POST"])
+def send_data(name_func: str):
+    if request.is_json:
+        if name_func == "list_files":
+            data = request.get_json()
+
+            all_list = os.listdir(data["folder"])
+
+            all_dirs = [i for i in all_list if os.path.isdir(os.path.join(data['folder'], i))]
+            all_files = [i for i in all_list if os.path.isfile(os.path.join(data['folder'], i))]
+
+
+            return {"dirs": all_dirs, "files": all_files}
+    else:
+        return "Query not json"
+
+# ? Функция для отправки данных
+@app.route("/set/files/<string:name_func>", methods=["POST"])
+def work_files(name_func: str):
+    if request.is_json:
+        data = request.get_json()
+        if name_func == "load":
+            if os.path.exists(data['path']):
+                with open(data['path'], 'r') as f:
+                    return f.read()
+        elif name_func == 'create':
+            with open(data['path'], 'w'): ...
+        elif name_func == 'update':
+            with open(data['path'], 'w') as f:
+                f.write(data['data'])
+        elif name_func == 'del':
+            os.remove(data['path'])
+        else:
+            return "Not found operation"
+        return "Ok", 200
+    else:
+        return "Query not json"
+
+
 if __name__ == "__main__":
     app.run(host=HOST, debug=SERVER_START_DEBUG)
